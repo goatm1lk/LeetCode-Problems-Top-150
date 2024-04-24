@@ -51,7 +51,7 @@ LinkedListOfRandomNumsCopy = copy_linked_list(LinkedListOfRandomNums)
 original_list = LinkedListOfRandomNumsCopy
 
 # Generate random indices for reversing
-rightValue = random.randint(0, 9)
+rightValue = random.randint(1, 9) 
 leftValue = random.randint(0, rightValue - 1)
 
 # Reverse the linked list between left and right indices
