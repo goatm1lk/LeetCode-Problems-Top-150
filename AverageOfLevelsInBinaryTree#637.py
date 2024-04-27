@@ -22,38 +22,51 @@ def createRandomTree(length,root):
 def printInOrder(root):
     if root is None:
         return
+    
     printInOrder(root.left)
     print(root.val)
     printInOrder(root.right)
     
 def getAverageOfLevelsInBinaryTree(root):
+    #Create a queue in order to loop through the values from each level.
     queue = deque([root])
+    #Create a dict to hold the resulting values from each level on the binary tree.
     output = {}
+    #Counter to keep track of the levels.
     counter = 0
-    #BFS thru the queue
+    #Loop through the queue in order to sort out the which values are on which level.
     while queue:
+        print("Level", counter, ":", [node.val for node in queue])
+        #Get the length of the current queue.
         level_size = len(queue)
+        #Create an array to append to the output.
         level_nums = []
-        
+        #Loop through the level size
         for _ in range(level_size):
+            #Pop the one node from the left of the queue.
             node = queue.popleft()
+            #Append that node value to the array that is holding the numbers for this level.
             level_nums.append(node.val)
+           #Now we want to add on the node to the left from this one.
             if node.left:
                 queue.append(node.left)
+            #and to the right aswell.
             if node.right:
                 queue.append(node.right)
+        #After looping through the queue size, and making a new queue if possible, add the level_nums array to our hash map.
         output[counter] = level_nums
+        #Move the counter up one as we moving down a level.
         counter += 1
-    
     results = {}
-    
+    #loop through the output to get all the averages of each level_nums array, in order to append to result array.
     for i in range(len(output)):
         Sum = sum(output[i])
         result = Sum / len(output[i])
         results[i + 1] = result
+        
     return output, results
 root = TreeNode(random.randint(0,10))
 createRandomTree(3,root)
 
 results = getAverageOfLevelsInBinaryTree(root)
-print("Here is each level of the Binary Tree: ",results[0], "Here is the Average of each level:", results[1])
+print("Here is the Average of each level:", results[1])
