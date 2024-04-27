@@ -30,6 +30,7 @@ def getAverageOfLevelsInBinaryTree(root):
     queue = deque([root])
     output = {}
     counter = 0
+    #BFS thru the queue
     while queue:
         level_size = len(queue)
         level_nums = []
@@ -41,7 +42,6 @@ def getAverageOfLevelsInBinaryTree(root):
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
-        print(counter)
         output[counter] = level_nums
         counter += 1
     
